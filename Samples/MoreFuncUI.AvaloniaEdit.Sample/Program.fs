@@ -19,7 +19,7 @@ type MainWindow() as this =
 
         this.AttachDevTools ()
 
-        Elmish.Program.mkSimple (Edit.init this) Edit.update Edit.view
+        Elmish.Program.mkSimple Edit.init Edit.update Edit.view
         |> Program.withHost this
         |> Program.run
 
