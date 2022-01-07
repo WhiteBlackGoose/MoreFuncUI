@@ -1,4 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <PackageId>MoreFuncUI.WebView</PackageId>
+    <Version>2.91.14</Version>
+    <PackageReleaseNotes>Address and create methods</PackageReleaseNotes>
+    <PackageTags>$(PackageTags), webview, webbrowser</PackageTags>
+  </PropertyGroup>
+  
   <ItemGroup>
     <Compile Include="Library.fs" />
   </ItemGroup>
