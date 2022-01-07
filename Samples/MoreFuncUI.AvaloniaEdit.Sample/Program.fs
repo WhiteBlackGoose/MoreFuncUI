@@ -7,6 +7,8 @@ open Avalonia.Input
 open Avalonia.FuncUI
 open Avalonia.FuncUI.Elmish
 open Avalonia.FuncUI.Components.Hosts
+open Avalonia.Diagnostics
+open Avalonia
 
 type MainWindow() as this =
     inherit HostWindow()
@@ -15,7 +17,9 @@ type MainWindow() as this =
         base.Width <- 1800.0
         base.Height <- 900.0
 
-        Elmish.Program.mkSimple (fun () -> Edit.init) Edit.update Edit.view
+        this.AttachDevTools ()
+
+        Elmish.Program.mkSimple (Edit.init this) Edit.update Edit.view
         |> Program.withHost this
         |> Program.run
 
@@ -26,6 +30,7 @@ type App() =
     override this.Initialize() =
         this.Styles.Load "avares://Avalonia.Themes.Default/DefaultTheme.xaml"
         this.Styles.Load "avares://Avalonia.Themes.Default/Accents/BaseDark.xaml"
+        this.Styles.Load "avares://AvaloniaEdit/AvaloniaEdit.xaml"
 
     override this.OnFrameworkInitializationCompleted() =
         match this.ApplicationLifetime with

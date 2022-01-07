@@ -1,4 +1,4 @@
-﻿module MoreFuncUI.AvaloniaEdit
+﻿module MoreFuncUI.AvaloniaEdit.TextEditor
 
 open AvaloniaEdit
 open Avalonia.FuncUI
@@ -8,6 +8,7 @@ open AvaloniaEdit.Document
 open AvaloniaEdit.Highlighting
 open Avalonia.Media
 open System.Text
+open Avalonia.Input
 
 type TextEditor with
     static member create(attrs : IAttr<TextEditor> list): IView<TextEditor> =
@@ -39,3 +40,19 @@ type TextEditor with
 
     static member encoding(enc : Encoding) =
         AttrBuilder<TextEditor>.CreateProperty<Encoding>(TextEditor.EncodingProperty, enc, ValueNone)
+
+
+
+
+type TextEditor with
+    static member onPreviewPointerHover(func: PointerEventArgs -> unit, ?subPatchOptions) =
+        AttrBuilder<'t>.CreateSubscription<PointerEventArgs>(TextEditor.PreviewPointerHoverEvent, func, ?subPatchOptions = subPatchOptions)
+
+    static member onPointerHover(func: PointerEventArgs -> unit, ?subPatchOptions) =
+        AttrBuilder<'t>.CreateSubscription<PointerEventArgs>(TextEditor.PointerHoverEvent, func, ?subPatchOptions = subPatchOptions)
+
+    static member onPreviewPointerHoverStopped(func: PointerEventArgs -> unit, ?subPatchOptions) =
+        AttrBuilder<'t>.CreateSubscription<PointerEventArgs>(TextEditor.PreviewPointerHoverStoppedEvent, func, ?subPatchOptions = subPatchOptions)
+
+    static member onPointerHoverStopped(func: PointerEventArgs -> unit, ?subPatchOptions) =
+        AttrBuilder<'t>.CreateSubscription<PointerEventArgs>(TextEditor.PointerHoverStoppedEvent, func, ?subPatchOptions = subPatchOptions)
