@@ -114,14 +114,28 @@ and parseFlat s : Result<Expression * char list, string> =
     | err -> Error $"Flat parser encountered unexpected: {err}"
 """);
             document2 = TextDocument("""
-“Thinking functionally” is critical to getting the most out of F#, 
-so I will spend a lot of time on getting the basics down, and I 
-will generally avoid too much discussion of the hybrid and OO features.
+@staticmethod
+def prepare_ds(X, y, cfg, test=True):
+    len1 = round(len(y) * (1 - cfg.VAL_SHARE))
+    len2 = round(len(y) * cfg.VAL_SHARE / REVE)
+    X_classes = Functional.get_x_classes(X, y, cfg.CLASS_COUNT)
+    assert len(X_classes) == cfg.CLASS_COUNT, "An error occurred while get X_classes"
+    if test:
+        fX_train, fy_train = Functional.get_ds(X_classes, len1, cfg, True)
+        fX_test, fy_test = Functional.get_ds(X_classes, len2, cfg, False)
+        return fX_train, fy_train, fX_test, fy_test
+    else:
+        return Functional.get_ds(X_classes, len1 + len2, cfg, False)
 
-The site will mostly focus on mainstream business problems, such as 
-domain driven design, website development, data processing, business 
-rules, and so on. In the examples I will try to use business concepts 
-such as Customer, Product, and Order, rather than overly academic ones.
+@staticmethod
+def gen_paths(path):
+    directories = os.listdir(path)
+    res = []
+    for directory in directories:
+        pp = path + "/" + directory
+        files = os.listdir(pp)
+        res.append([pp + "/" + i for i in files])
+    return res
 """);
             fontSize = 28;
             theme = ThemeName.DarkPlus
@@ -145,32 +159,30 @@ such as Customer, Product, and Order, rather than overly academic ones.
                     TextEditor.document state.document1
                     TextEditor.fontFamily "monospace"
                     TextEditor.fontSize state.fontSize
-                    TextEditor.fontWeight FontWeight.Light
                     TextEditor.showLineNumbers true
                     TextEditor.background Brushes.Transparent
                     TextEditor.syntaxHighlightingLanguage (Some "fsharp")
-                    TextEditor.syntaxHighlightingTheme state.theme
+                    TextEditor.syntaxHighlightingTheme ThemeName.DarkPlus
+                ]
+                TextEditor.create [
+                    TextEditor.dock Dock.Left
+                    TextEditor.document state.document1
+                    TextEditor.fontFamily "monospace"
+                    TextEditor.fontSize state.fontSize
+                    TextEditor.showLineNumbers true
+                    TextEditor.background Brushes.Transparent
+                    TextEditor.syntaxHighlightingLanguage (Some "fsharp")
+                    TextEditor.syntaxHighlightingTheme ThemeName.KimbieDark
                 ]
                 TextEditor.create [
                     TextEditor.dock Dock.Left
                     TextEditor.document state.document2
-                    TextEditor.fontFamily "arial"
+                    TextEditor.fontFamily "monospace"
                     TextEditor.fontSize state.fontSize
-                    TextEditor.fontWeight FontWeight.Light
-                    TextEditor.fontStyle FontStyle.Italic
                     TextEditor.showLineNumbers true
-                    TextEditor.isReadOnly false
-                    TextEditor.minHeight 500
-                    TextEditor.background Brushes.White
-                    TextEditor.foreground Brushes.Brown
-                ]
-                Button.create [
-                    Button.content "ToLight"
-                    Button.onClick (fun _ -> dispatch ToLightScheme )
-                ]
-                Button.create [
-                    Button.content "ToDark"
-                    Button.onClick (fun _ -> dispatch ToDarkScheme )
+                    TextEditor.background Brushes.Transparent
+                    TextEditor.syntaxHighlightingLanguage (Some "python")
+                    TextEditor.syntaxHighlightingTheme ThemeName.DimmedMonokai
                 ]
             ]
         ]
