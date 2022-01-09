@@ -16,6 +16,7 @@ module Edit =
         }
 
     let init () =
+        
         { 
             document1 = TextDocument("""let a = 5
 printfn $"Hello, world{a * 3}!"

@@ -2,8 +2,8 @@
   <ItemGroup>
     <Compile Include="TextEditor.fs" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Avalonia.AvaloniaEdit" Version="0.10.9" />
+    <ProjectReference Include="..\AvaloniaEdit\src\AvaloniaEdit.TextMate\AvaloniaEdit.TextMate.csproj" />
+    <ProjectReference Include="..\AvaloniaEdit\src\AvaloniaEdit\AvaloniaEdit.csproj" />
   </ItemGroup>
 </Project>
