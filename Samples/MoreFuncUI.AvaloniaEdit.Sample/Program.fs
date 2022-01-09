@@ -13,6 +13,7 @@ open Avalonia
 type MainWindow() as this =
     inherit HostWindow()
     do
+        // this.OnInitialized
         base.Title <- "MoreFuncUI.AvaloniaEdit.Sample"
         base.Width <- 1800.0
         base.Height <- 900.0
